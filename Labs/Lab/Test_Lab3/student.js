@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
+    var studentList = []; // Array to store student data
+
     function addStudent(event) {
         event.preventDefault(); // Prevent form submission
 
@@ -8,34 +10,74 @@ document.addEventListener('DOMContentLoaded', function () {
         var studentAge = document.getElementById("studentAge").value;
         var studentGender = document.querySelector('input[name="gender"]:checked').value;
 
-        // Create a new row for the student
-        var newRow = document.createElement("tr");
+        // Create a new student object
+        var student = {
+            id: studentId,
+            name: studentName,
+            age: studentAge,
+            gender: studentGender
+        };
 
-        // Create the cells for ID, Name, Age, and Gender
-        var idCell = document.createElement("td");
-        idCell.textContent = studentId;
+        // Add the student to the list
+        studentList.push(student);
 
-        var nameCell = document.createElement("td");
-        nameCell.textContent = studentName;
-
-        var ageCell = document.createElement("td");
-        ageCell.textContent = studentAge;
-
-        var genderCell = document.createElement("td");
-        genderCell.textContent = studentGender;
-
-        // Append the cells to the new row
-        newRow.appendChild(idCell);
-        newRow.appendChild(nameCell);
-        newRow.appendChild(ageCell);
-        newRow.appendChild(genderCell);
-
-        // Append the new row to the table body
-        var tableBody = document.getElementById("studentTableBody");
-        tableBody.appendChild(newRow);
+        // Update the table
+        updateTable();
 
         // Clear the form inputs
         document.getElementById("addStudentForm").reset();
+    }
+
+    // Function to update the table
+    function updateTable() {
+        // Get the table body
+        var tableBody = document.getElementById("studentTableBody");
+
+        // Clear the table body
+        tableBody.innerHTML = '';
+
+        // Loop through the student list and add rows to the table
+        studentList.forEach(function (student) {
+            // Create a new row for the student
+            var newRow = document.createElement("tr");
+
+            // Create the cells for ID, Name, Age, and Gender
+            var idCell = document.createElement("td");
+            idCell.textContent = student.id;
+
+            var nameCell = document.createElement("td");
+            nameCell.textContent = student.name;
+
+            var ageCell = document.createElement("td");
+            ageCell.textContent = student.age;
+
+            var genderCell = document.createElement("td");
+            genderCell.textContent = student.gender;
+
+            var deleteCell = document.createElement('td');
+            var deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.classList.add('btn', 'btn-danger');
+            deleteButton.addEventListener('click', function () {
+                // Remove the corresponding student from the list
+                var index = studentList.indexOf(student);
+                if (index !== -1) {
+                    studentList.splice(index, 1);
+                    updateTable(); // Update the table after removing the student
+                }
+            });
+            deleteCell.appendChild(deleteButton);
+
+            // Append the cells to the new row
+            newRow.appendChild(idCell);
+            newRow.appendChild(nameCell);
+            newRow.appendChild(ageCell);
+            newRow.appendChild(genderCell);
+            newRow.appendChild(deleteCell);
+
+            // Append the new row to the table body
+            tableBody.appendChild(newRow);
+        });
     }
 
     // Function to update a student
@@ -46,26 +88,22 @@ document.addEventListener('DOMContentLoaded', function () {
         var updatedAge = document.getElementById("studentAge").value;
         var updatedGender = document.querySelector('input[name="gender"]:checked').value;
 
-        // Find the row that needs to be updated
-        var tableBody = document.getElementById("studentTableBody");
-        var rows = tableBody.getElementsByTagName("tr");
+        // Find the student that needs to be updated
+        var studentToUpdate = studentList.find(function (student) {
+            return student.id === updatedId;
+        });
 
-        for (var i = 0; i < rows.length; i++) {
-            var row = rows[i];
-            var idCell = row.cells[0];
+        if (studentToUpdate) {
+            // Update the student's data
+            studentToUpdate.name = updatedName;
+            studentToUpdate.age = updatedAge;
+            studentToUpdate.gender = updatedGender;
 
-            if (idCell.textContent === updatedId) {
-                // Update the corresponding cells with new values
-                row.cells[1].textContent = updatedName;
-                row.cells[2].textContent = updatedAge;
-                row.cells[3].textContent = updatedGender;
+            // Update the table
+            updateTable();
 
-                // Clear the form inputs
-                document.getElementById("addStudentForm").reset();
-
-                // Exit the loop once the update is done
-                break;
-            }
+            // Clear the form inputs
+            document.getElementById("addStudentForm").reset();
         }
     }
 
@@ -134,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 deleteButton.textContent = 'Delete';
                 deleteButton.classList.add('btn', 'btn-danger');
                 deleteButton.addEventListener('click', function () {
-                    // Remove the corresponding row when the delete button is clicked
+                    // Remove the corresponding student from the list
                     var index = studentList.indexOf(student);
                     if (index !== -1) {
                         studentList.splice(index, 1);
