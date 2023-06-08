@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>category</td>
+            <td>start</td>
+            <td>end</td>
+        </tr>
+        <tbody id="table">
+        </tbody>
+    </table>
+
+    <button onclick="loadData()">Get company name</button>
+    <br/>
+    Start time from year:
+    <input type="number" id="fromYear"/>
+    To year: 
+    <input type="number" id="toYear"/>
+    <br/>
+    <button onclick="filterData()">Filter</button>
+    <br/>
+    search by name:
+    <input type="text" id="nameSearch"/>
+    <button onclick="searchByName()">search by name</button>
+    <br/>
+
+    <button onclick="sortByName()">sort by name</button>
+    <br/>
+    <button onclick="sortByTimeStart()">sort by time start</button>
+    <br/>
+
+    <script src="main.js"></script>
+</body>
+</html>

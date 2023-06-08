@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <title>List Of Student</title>
+
+    <link rel="stylesheet" href="path/to/style.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>Student List</h1>
+
+        <form id="addStudentForm">
+            <div class="form-group">
+                <label for="studentId">ID:</label>
+                <input type="text" class="form-control" id="studentId" placeholder="Enter ID" required>
+            </div>
+            <div class="form-group">
+                <label for="studentName">Name:</label>
+                <input type="text" class="form-control" id="studentName" placeholder="Enter Name" required>
+            </div>
+            <div class="form-group">
+                <label for="studentAge">Age:</label>
+                <input type="number" class="form-control" id="studentAge" placeholder="Enter Age" required>
+            </div>
+            <div class="form-group">
+                <label for="studentGender">Gender:</label>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" id="male" value="male" required>
+                        <label class="form-check-label" for="male">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" id="female" value="female" required>
+                        <label class="form-check-label" for="female">Female</label>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Student</button>
+            <button type="button" class="btn btn-primary" style="background-color: grey">Update</button>
+            <button type="button" class="btn btn-primary" style="background-color: red">Sort</button>
+            <button type="button" class="btn btn-primary" style="background-color: yellow">Search</button>
+        </form>
+
+        <table id="studentTable" class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="studentTableBody">
+            </tbody>
+        </table>
+    </div>
+
+    <script src="./student.js"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+    <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>
