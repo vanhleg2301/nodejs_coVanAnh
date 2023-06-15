@@ -1,0 +1,3 @@
+trc thi 3 hôm sẽ đc gửi project 
+xong npm i ở nhà -> đến trường để làm bài 
+=> nộp file không có nodemodule
